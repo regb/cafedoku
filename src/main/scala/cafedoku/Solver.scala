@@ -37,10 +37,9 @@ object Solver {
 
     val allConstraints = onePerEntry ++ uniqueInColumns ++ uniqueInRows ++ uniqueInGrid1 ++ uniqueInGrid2 ++ forcedEntries
 
-    solveForSatisfiability(and(allConstraints:_*)) match {
-      case None => None
-      case Some(model) => Some(vars.map(row => row.map(vs => vs.indexWhere(v => model(v)) + 1)))
-    }
+    solveForSatisfiability(and(allConstraints:_*)).map(model =>
+      vars.map(row => row.map(vs => vs.indexWhere(v => model(v)) + 1))
+    )
   }
 
 }
