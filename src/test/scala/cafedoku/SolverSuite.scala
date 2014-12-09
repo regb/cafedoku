@@ -16,7 +16,19 @@ class SolverSuite extends FunSuite {
     Array(4, 9, 1, 6, 3, 2, 7, 8, 5)
   )
 
-  test("solve basic") {
+  test("Solve puzzle with one hole") {
+    val puzzle1: Array[Array[Option[Int]]] = 
+      solvedPuzzle.map(row => row.map(i => (Some(i): Option[Int])))
+    val correct1 = puzzle1(2)(7).get
+    puzzle1(2)(7) = None
+
+    val res1 = Solver.solve(puzzle1)
+    assert(res1 !== None)
+    assert(res1.get(2)(7) === correct1)
+
+  }
+
+  test("Solve puzzle with a few holes") {
     val puzzle1: Array[Array[Option[Int]]] = 
       solvedPuzzle.map(row => row.map(i => (Some(i): Option[Int])))
     val correct1 = puzzle1(0)(0).get
