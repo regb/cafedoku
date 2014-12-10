@@ -10,7 +10,7 @@ lazy val cafedokuSetting: Setting[Task[File]] =
     val cp = (fullClasspath in Runtime).value
     val mainClass = "cafedoku.Main"
     val contents = cafedokuScriptTemplate.format(cp.files.absString, mainClass)
-    val out = baseDirectory.value / "cafedoku"
+    val out = target.value / "cafedoku"
     IO.write(out, contents)
     out.setExecutable(true)
     out
