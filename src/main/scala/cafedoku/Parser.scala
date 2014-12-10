@@ -5,33 +5,24 @@ import java.io.InputStream
 
 object Parser {
 
+  /*
+   * A sudoku solver is represented in text format,
+   * with 9 lines of 9 characters, each character [1-9.]
+   * with '.' representing unknown number
+   */
   def parse(input: InputStream): Array[Array[Option[Int]]] = {
 
-    val puzzle: Array[Array[Option[Int]]] = Array.fill(9,9)(None)
-    var i = 0
-    var j = 0
-    var expectComma = false
-    for(line <- Source.fromInputStream(input).getLines()) {
-      for(c <- line) {
-        if(c != ' ') {
-          if(expectComma && c != ',') {
-            println("Parse error")
-            sys.exit(-1)
-          } else if(!expectComma) {
-            val entry = c.toString.toInt
-            if(entry == 0)
-              puzzle(i)(j) = None
-            else
-              puzzle(i)(j) = Some(entry)
-            j = (j + 1) % 9
-            if(j == 0)
-              i = i + 1
-          }
-          expectComma = !expectComma
-        }
+    try {
+      val lines = for(line <- Source.fromInputStream(input).getLines()) yield {
+        val row = line.map(c => if(c == '.') None else Some(c.asDigit))
+        row.toArray
       }
+      lines.toArray
+    } catch {
+      case e: Exception =>
+        println("Parse error")
+        sys.exit(-1)
     }
-    puzzle
   }
 
 }
