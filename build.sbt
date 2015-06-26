@@ -20,14 +20,14 @@ lazy val root = (project in file(".")).
   settings(
     name := "CafeDoku",
     version := "1.0",
-    scalaVersion := "2.11.4",
+    scalaVersion := "2.11.7",
     cafedokuSetting,
     libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.1" % "test"
   ).
   dependsOn(cafeSat)
 
 lazy val cafeSat = {
-  val commit = "b20ab56dec599c91e51d33dc4512a55fafeea497"
-  val githubLink = s"git://github.com/regb/scabolic.git#$commit"
+  val commit = "e39e2fb11b66b5daf8002cb5bf457a2a2f889e05"
+  val githubLink = s"git://github.com/regb/cafesat.git#$commit"
   RootProject(uri(githubLink))
 }
