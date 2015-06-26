@@ -7,6 +7,10 @@ Scala and based on the [CafeSat](https://github.com/regb/scabolic) SAT solver.
 CafeDoku is a very simple project, with limited ambitions, mostly to experiment
 with CafeSat as a Scala library.
 
+The core solving part is in [`Solver`](/src/main/scala/cafedoku/Solver.scala) and
+consists of about 10 lines of code. It illustrates how to elegantly solve sudoku
+problems by encoding to SAT and how to use CafeSat to solve the SAT instance.
+
 Usage
 -----
 
